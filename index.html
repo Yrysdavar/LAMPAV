@@ -175,6 +175,36 @@
     border-radius: 12px;
   }
 
+  .video-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.video-wrapper{
+    position:relative;
+    width:100%;
+    padding-bottom:56.25%;
+    border-radius:12px;
+    overflow:hidden;
+    background:#000;
+}
+
+.video-wrapper video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+@media(max-width:768px){
+    .video-grid{
+        grid-template-columns:1fr;
+    }
+}
+
   .video-placeholder {
     position: absolute;
     inset: 0;
@@ -437,24 +467,21 @@
 <section class="section video-section" id="video">
   <div class="label">Démonstration</div>
   <h2>Le drone en action</h2>
-  <div class="video-wrapper">
-    <!--
-      REMPLACER : mets l'URL YouTube de ta démo ici.
-      Exemple : src="https://www.youtube.com/embed/TON_VIDEO_ID"
-      Si pas encore de vidéo, supprimer ce bloc <iframe> et garder le placeholder.
-    -->
-    <video
-        autoplay
-        muted
-        loop
-        playsinline
-        controls
-        style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:12px;">
-        <source src="vid1.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video> 
+<div class="video-grid">
 
-  </div>
+    <div class="video-wrapper">
+        <video autoplay muted loop playsinline controls>
+            <source src="vid1.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="video-wrapper">
+        <video autoplay muted loop playsinline controls>
+            <source src="VID2.mp4" type="video/mp4">
+        </video>
+    </div>
+
+</div>
 </section>
 
 <!-- SPECS -->
