@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AeroAID — Drone intelligent de recherche et sauvetage. Projet LAMPAV, École Centrale Casablanca.">
+<title>AeroAID — LAMPAV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-dark: #0F3D22;
+    --green-mid: #1B5C34;
+    --green-light: #2E7D52;
+    --orange: #E07A2A;
+    --orange-light: #F4A050;
+    --cream: #F7F4EE;
+    --text: #1A1A18;
+    --text-soft: #4A4A45;
+    --border: rgba(0,0,0,0.1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--green-dark);
+    color: #fff;
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 40px solid rgba(224, 122, 42, 0.12);
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(224,122,42,0.2);
+    color: var(--orange-light);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 100px;
+    border: 1px solid rgba(224,122,42,0.3);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(3rem, 16vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero h1 span { color: var(--orange); }
+
+  .hero-sub {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(0.8rem, 3.5vw, 1rem);
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-pitch {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    color: rgba(255,255,255,0.9);
+    max-width: 380px;
+    margin: 0 auto 1.8rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .hero-pill:hover { background: var(--orange-light); }
+  .hero-pill svg { width: 16px; height: 16px; }
+
+  /* ── PROBLEM ── */
+  .section { padding: 2.5rem 1.5rem; }
+
+  .problem {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 0.8rem;
+  }
+
+  .problem h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.2rem, 5vw, 1.6rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--green-dark);
+    margin-bottom: 1rem;
+  }
+
+  .problem p {
+    font-size: 15px;
+    color: var(--text-soft);
+    line-height: 1.7;
+  }
+
+  /* ── VIDEO ── */
+  .video-section { background: var(--green-dark); padding: 2.5rem 1.5rem; }
+
+  .video-section .label { color: var(--orange-light); }
+
+  .video-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.1rem, 5vw, 1.4rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.2rem;
+  }
+
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.12);
+    overflow: hidden;
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    border: none;
+    border-radius: 12px;
+  }
+
+  .video-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .video-placeholder svg { width: 40px; height: 40px; opacity: 0.4; }
+
+  /* ── SPECS ── */
+  .specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 1.5rem;
+  }
+
+  .spec-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.2rem 1rem;
+    border: 1px solid var(--border);
+  }
+
+  .spec-icon {
+    font-size: 22px;
+    margin-bottom: 0.5rem;
+  }
+
+  .spec-val {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--green-dark);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .spec-val span { font-size: 1rem; font-weight: 500; }
+
+  .spec-label {
+    font-size: 12px;
+    color: var(--text-soft);
+    line-height: 1.3;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .steps { background: #fff; }
+
+  .step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    background: var(--green-dark);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  .step-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 3px;
+  }
+
+  .step-desc {
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.5;
+  }
+
+  /* ── TEAM ── */
+  .team { background: var(--cream); }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+    margin-top: 1.2rem;
+  }
+
+  .member {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem 0.8rem;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+
+  .avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--green-mid);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0 auto 0.6rem;
+  }
+
+  .member-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green-dark);
+    line-height: 1.2;
+  }
+
+  .member-role {
+    font-size: 11px;
+    color: var(--text-soft);
+    margin-top: 3px;
+  }
+
+  .supervisor {
+    margin-top: 1rem;
+    background: var(--green-dark);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .supervisor .avatar { background: var(--orange); margin: 0; flex-shrink: 0; }
+
+  .supervisor-info {}
+
+  .supervisor-info small {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .supervisor-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* ── LINKS ── */
+  .links { background: #fff; }
+
+  .link-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    border: 1.5px solid var(--border);
+    color: var(--text);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .link-btn:hover { border-color: var(--green-light); background: rgba(30,90,52,0.04); }
+
+  .link-btn.primary {
+    background: var(--green-dark);
+    border-color: var(--green-dark);
+    color: #fff;
+  }
+
+  .link-btn.primary:hover { background: var(--green-mid); border-color: var(--green-mid); }
+
+  .link-icon {
+    width: 38px; height: 38px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.06);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .link-btn.primary .link-icon { background: rgba(255,255,255,0.15); }
+
+  .link-icon svg { width: 18px; height: 18px; }
+
+  .link-text-main {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .link-text-sub {
+    font-size: 12px;
+    color: var(--text-soft);
+    margin-top: 1px;
+  }
+
+  .link-btn.primary .link-text-sub { color: rgba(255,255,255,0.6); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--green-dark);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  footer strong { color: rgba(255,255,255,0.85); }
+
+  h2.section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.1rem, 5vw, 1.4rem);
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 1rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">PLBD 10 · École Centrale Casablanca</div>
+  <h1>Aero<span>AID</span></h1>
+  <p class="hero-sub">Localisation Aérienne Mobile pour l'Assistance aux Victimes</p>
+  <p class="hero-pitch">Un drone intelligent qui localise et priorise les victimes de catastrophes en quelques minutes.</p>
+  <a href="#video" class="hero-pill">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    Voir la démo
+  </a>
+</section>
+
+<!-- PROBLEM -->
+<section class="section problem">
+  <div class="label">Problématique</div>
+  <h2>Les premières heures sont critiques. Localiser les victimes reste le défi numéro&nbsp;1.</h2>
+  <p>Lors de séismes et d'inondations en Afrique, les équipes de secours peinent à couvrir rapidement de vastes zones — notamment les zones rurales et isolées. AeroAID automatise cette exploration pour sauver des vies.</p>
+</section>
+
+<!-- VIDEO -->
+<section class="section video-section" id="video">
+  <div class="label">Démonstration</div>
+  <h2>Le drone en action</h2>
+  <div class="video-wrapper">
+    <!--
+      REMPLACER : mets l'URL YouTube de ta démo ici.
+      Exemple : src="https://www.youtube.com/embed/TON_VIDEO_ID"
+      Si pas encore de vidéo, supprimer ce bloc <iframe> et garder le placeholder.
+    -->
+    <iframe
+      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+      title="AeroAID Demo"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
+<!-- SPECS -->
+<section class="section" style="background:#fff; border-bottom:1px solid var(--border);">
+  <div class="label">Performances</div>
+  <h2 class="section-title">Chiffres clés</h2>
+  <div class="specs-grid">
+    <div class="spec-card">
+      <div class="spec-icon">⏱</div>
+      <div class="spec-val">20–40<span> min</span></div>
+      <div class="spec-label">Autonomie de vol</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">🚀</div>
+      <div class="spec-val">&lt;10<span> min</span></div>
+      <div class="spec-label">Temps de déploiement</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">🎯</div>
+      <div class="spec-val">YOLOv8</div>
+      <div class="spec-label">Détection IA embarquée</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">🌍</div>
+      <div class="spec-val">GPS<span> + LoRa</span></div>
+      <div class="spec-label">Transmission terrain</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section steps">
+  <div class="label">Fonctionnement</div>
+  <h2 class="section-title">3 phases d'opération</h2>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div>
+      <div class="step-title">Pré-déploiement</div>
+      <div class="step-desc">Analyse satellitaire de la zone sinistrée. Planification automatique de la trajectoire de recherche.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div>
+      <div class="step-title">Détection active</div>
+      <div class="step-desc">Le drone survole la zone. Vision par ordinateur (RGB + IR) et IA embarquée identifient les victimes en temps réel.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div>
+      <div class="step-title">Priorisation & transmission</div>
+      <div class="step-desc">Les positions GPS des victimes sont transmises aux équipes de secours avec un ordre de priorité d'intervention.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section team">
+  <div class="label">L'équipe</div>
+  <h2 class="section-title">Groupe 10 — PLBD</h2>
+
+  <div class="team-grid">
+    <div class="member">
+      <div class="avatar">WA</div>
+      <div class="member-name">Wissal Ait Ali</div>
+    </div>
+    <div class="member">
+      <div class="avatar">IB</div>
+      <div class="member-name">Ikram Boulouqat</div>
+    </div>
+    <div class="member">
+      <div class="avatar">AL</div>
+      <div class="member-name">Aymen Laouina</div>
+    </div>
+    <div class="member">
+      <div class="avatar">AT</div>
+      <div class="member-name">Ahmad Mabarak Tiemtore</div>
+    </div>
+    <div class="member">
+      <div class="avatar">HL</div>
+      <div class="member-name">Hammad Labbaih</div>
+    </div>
+  </div>
+
+  <div class="supervisor">
+    <div class="avatar">AS</div>
+    <div class="supervisor-info">
+      <small>Encadrant</small>
+      <div class="supervisor-name">Pr. Anass Sibari</div>
+    </div>
+  </div>
+</section>
+
+<!-- LINKS -->
+<section class="section links">
+  <div class="label">Ressources</div>
+  <h2 class="section-title">Aller plus loin</h2>
+
+  <!--
+    REMPLACER les href="#" par vos vraies URLs
+  -->
+  <a href="#" class="link-btn primary">
+    <div class="link-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+    </div>
+    <div>
+      <div class="link-text-main">Code source</div>
+      <div class="link-text-sub">GitHub · github.com/ton-repo</div>
+    </div>
+  </a>
+
+  <a href="#" class="link-btn">
+    <div class="link-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    </div>
+    <div>
+      <div class="link-text-main">Rapport technique</div>
+      <div class="link-text-sub">Cahier des charges · PDF</div>
+    </div>
+  </a>
+
+  <a href="#" class="link-btn">
+    <div class="link-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    </div>
+    <div>
+      <div class="link-text-main">Poster LAMPAV</div>
+      <div class="link-text-sub">Affiche du projet · PNG</div>
+    </div>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>AeroAID — LAMPAV</strong><br>
+  Projet Learning by Doing · École Centrale Casablanca<br>
+  Année académique 2024–2025
+</footer>
+
+</body>
+</html>
