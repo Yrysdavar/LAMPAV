@@ -443,12 +443,17 @@
       Exemple : src="https://www.youtube.com/embed/TON_VIDEO_ID"
       Si pas encore de vidéo, supprimer ce bloc <iframe> et garder le placeholder.
     -->
-    <iframe
-      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-      title="AeroAID Demo"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
+    <video
+        autoplay
+        muted
+        loop
+        playsinline
+        controls
+        style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:12px;">
+        <source src="demo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video> 
+      
   </div>
 </section>
 
