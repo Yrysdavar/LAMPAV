@@ -228,15 +228,8 @@
 
   .video-section .label { color: var(--orange-light); text-align: center; }
 
-  .video-section h2 {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: clamp(1.5rem, 6vw, 2.3rem);
-    font-weight: 700;
-    line-height: 1.12;
-    letter-spacing: -0.02em;
-    color: #fff;
-    margin-bottom: 1.6rem;
-  }
+  .video-section .sec-head h2 { color: #fff; }
+  .video-section .sec-head { margin-bottom: 1.6rem; }
 
   .video-wrapper {
     position: relative;
@@ -998,8 +991,10 @@
 
 <!-- VIDEO -->
 <section class="section video-section" id="video">
-  <div class="label">Démonstration</div>
-  <h2>Le drone en action</h2>
+  <div class="sec-head">
+    <div class="label">Démonstration</div>
+    <h2>Le drone en action</h2>
+  </div>
 <div class="video-grid">
 
     <!-- VIDÉO 1 : vid1.mp4 -->
