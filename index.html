@@ -224,16 +224,16 @@
   }
 
   /* ── VIDEO ── */
-  .video-section { background: var(--green-dark); padding: 2.5rem 1.5rem; }
+  .video-section { background: var(--green-dark); padding: 2.5rem 1.5rem; text-align: center; }
 
-  .video-section .label { color: var(--orange-light); }
+  .video-section .label { color: var(--orange-light); text-align: center; }
 
   .video-section h2 {
     font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: clamp(1.1rem, 5vw, 1.4rem);
+    font-size: clamp(1.3rem, 5vw, 1.9rem);
     font-weight: 700;
     color: #fff;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.6rem;
   }
 
   .video-wrapper {
@@ -258,6 +258,8 @@
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:20px;
+    max-width:1000px;
+    margin:0 auto;
 }
 
 .video-wrapper{
@@ -998,18 +1000,18 @@
   <h2>Le drone en action</h2>
 <div class="video-grid">
 
-    <!-- VIDÉO 1 : placez votre fichier ici (remplacez "videos/demo1.mp4") -->
+    <!-- VIDÉO 1 : vid1.mp4 -->
     <div class="video-wrapper">
         <video autoplay muted loop playsinline controls>
-            <source src="videos/demo1.mp4" type="video/mp4">
+            <source src="vid1.mp4" type="video/mp4">
             Votre navigateur ne supporte pas la lecture vidéo.
         </video>
     </div>
 
-    <!-- VIDÉO 2 : placez votre fichier ici (remplacez "videos/demo2.mp4") -->
+    <!-- VIDÉO 2 : VID2.mp4 -->
     <div class="video-wrapper">
         <video autoplay muted loop playsinline controls>
-            <source src="videos/demo2.mp4" type="video/mp4">
+            <source src="VID2.mp4" type="video/mp4">
             Votre navigateur ne supporte pas la lecture vidéo.
         </video>
     </div>
@@ -1080,7 +1082,6 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
     Voir le poster
   </a>
-  <a href="https://github.com/Yrysdavar/LAMPAV" target="_blank" rel="noopener" class="poster-secondary">Code source · GitHub</a>
 </section>
 
 <!-- FOOTER -->
